@@ -1,0 +1,38 @@
+//Find Pivot with duplicates elements in a rotated array that is sorted 
+package com.ismailzia;
+
+import java.util.Scanner;
+
+public class FindPivot {
+    public static void main(String[] args) {
+        int[] arr = {7, 8, 9, 10, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 5, 6, 6, 6};
+        System.out.println("Peak Element position : " + pivotWithDuplicates(arr));
+        //Find the index of the smallest element 
+        //rotation point
+        System.out.println("Rotation Point : " + findRotationIndex(arr));
+    }
+
+    public static int pivotWithDuplicates(int[] arr) {
+        int left = 0, right = arr.length-1;
+        while(left < right) {
+            int mid = left + (right - left) / 2;
+            if(arr[mid] > arr[right])  left = mid+1; 
+            else if(arr[mid] < arr[right]) right = mid;
+            else right--;
+        }
+        return left-1;
+    }
+
+    public static int findRotationIndex(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
+}
